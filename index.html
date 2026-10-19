@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>GameStats | GTA V Analytics</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="layout">
+    <aside class="sidebar">
+      <a class="brand" href="#">
+        <span class="brand-mark">G</span>
+        <span><b>GameStats</b><small>PERFORMANCE LAB</small></span>
+      </a>
+      <div class="nav-caption">WORKSPACE</div>
+      <a class="nav-link active" href="#overview"><span>▦</span> Overview</a>
+      <a class="nav-link" href="#hardware"><span>◈</span> Hardware</a>
+      <a class="nav-link" href="#leaderboard"><span>♛</span> Leaderboard</a>
+      <a class="nav-link" href="#sessions"><span>▤</span> Sessions & data</a>
+      <div class="sidebar-bottom">
+        <div class="game-status"><span class="pulse"></span><div><b>GTA V</b><small>Analytics dashboard</small></div></div>
+        <p>GameStats · Student project<br>HTML · CSS · JavaScript</p>
+      </div>
+    </aside>
+
+    <main class="main">
+      <header class="topbar">
+        <div>
+          <p class="eyebrow">GAMING ANALYTICS / GTA V</p>
+          <h1>Performance overview</h1>
+          <p class="muted">Explore session stats, frame rates and hardware performance.</p>
+        </div>
+        <div class="header-actions">
+          <label for="csvUpload" class="button primary">↑ Upload CSV</label>
+          <input type="file" id="csvUpload" accept=".csv,text/csv" hidden>
+          <button id="exportBtn" class="button secondary">↓ Export CSV</button>
+        </div>
+      </header>
+
+      <section class="filterbar">
+        <div class="data-label"><span class="pulse"></span><span id="dataStatus">Loading dataset…</span></div>
+        <div class="filters">
+          <label>Game mode
+            <select id="modeFilter"><option value="all">All modes</option></select>
+          </label>
+          <label>Search player
+            <input id="playerSearch" type="search" placeholder="Search player…">
+          </label>
+          <button id="resetBtn" class="button small secondary">Reset</button>
+        </div>
+      </section>
+
+      <section id="overview" class="section">
+        <div class="section-heading">
+          <div><h2>At a glance</h2><p>Key metrics for the selected sessions</p></div>
+          <span class="tag">LIVE SUMMARY</span>
+        </div>
+        <div class="metric-grid">
+          <article class="metric-card"><div class="metric-head"><span>Total sessions</span><span class="metric-icon purple">▤</span></div><div id="totalSessions" class="metric-value">—</div><div class="metric-foot">Sessions in current view</div></article>
+          <article class="metric-card"><div class="metric-head"><span>Average FPS</span><span class="metric-icon blue">↗</span></div><div id="avgFps" class="metric-value">—</div><div class="metric-foot">Frames per second</div></article>
+          <article class="metric-card"><div class="metric-head"><span>CPU usage</span><span class="metric-icon orange">⌁</span></div><div id="avgCpu" class="metric-value">—</div><div class="metric-foot">Average utilization</div></article>
+          <article class="metric-card"><div class="metric-head"><span>GPU usage</span><span class="metric-icon green">◈</span></div><div id="avgGpu" class="metric-value">—</div><div class="metric-foot">Average utilization</div></article>
+        </div>
+      </section>
+
+      <section id="hardware" class="section">
+        <div class="section-heading"><div><h2>Performance insights</h2><p>Compare frame rate and hardware measurements</p></div></div>
+        <div class="chart-grid">
+          <article class="panel">
+            <div class="panel-heading"><div><h3>FPS by session</h3><p>First 20 sessions in the current view</p></div><span class="legend"><i class="dot fps"></i> Average FPS</span></div>
+            <div id="fpsChart" class="chart-wrap"><div class="empty">Upload a CSV to view chart</div></div>
+          </article>
+          <article class="panel">
+            <div class="panel-heading"><div><h3>Hardware usage</h3><p>Average CPU and GPU utilization</p></div></div>
+            <div id="usageChart" class="chart-wrap"><div class="empty">No data yet</div></div>
+          </article>
+          <article class="panel">
+            <div class="panel-heading"><div><h3>GPU temperature</h3><p>Temperature across available sessions</p></div><span class="unit">°C</span></div>
+            <div id="tempChart" class="chart-wrap"><div class="empty">No data yet</div></div>
+          </article>
+          <article class="panel">
+            <div class="panel-heading"><div><h3>RAM usage</h3><p>Memory consumption across sessions</p></div><span class="unit">GB</span></div>
+            <div id="ramChart" class="chart-wrap"><div class="empty">No data yet</div></div>
+          </article>
+        </div>
+      </section>
+
+      <section id="leaderboard" class="section">
+        <div class="section-heading"><div><h2>Player leaderboard</h2><p>Ranked by average score when score data is available</p></div></div>
+        <article class="panel table-panel">
+          <div class="table-scroll"><table><thead><tr><th>#</th><th>Player</th><th>Sessions</th><th>Avg. score</th><th>Avg. KDA</th><th>Win rate</th></tr></thead><tbody id="leaderboardBody"><tr><td colspan="6" class="empty-cell">Load a CSV to populate the leaderboard.</td></tr></tbody></table></div>
+        </article>
+      </section>
+
+      <section id="sessions" class="section">
+        <div class="section-heading"><div><h2>Sessions & data</h2><p id="tableCaption">Inspect records and export the filtered dataset</p></div><span id="rowCount" class="tag">0 ROWS</span></div>
+        <article class="panel table-panel">
+          <div class="table-scroll"><table><thead id="dataHead"></thead><tbody id="dataBody"></tbody></table></div>
+          <div class="table-footer"><span id="tableInfo">No dataset loaded</span><button id="exportBtnBottom" class="button small secondary">Export filtered data</button></div>
+        </article>
+      </section>
+      <footer>GameStats <span>·</span> GTA V Performance & Hardware Analyzer <span>·</span> Frontend built with HTML, CSS and JavaScript</footer>
+    </main>
+  </div>
+  <script src="script.js"></script>
+</body>
+</html>
